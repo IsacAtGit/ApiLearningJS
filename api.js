@@ -1,15 +1,35 @@
 const { json } = require("stream/consumers")
 
+//AJAX CAll
+// Asynchronous JavaScript And XML.
+//1. An event occurs in a web page (the page is loaded, a button is clicked)
+//2. An XMLHttpRequest object is created by JavaScript
+//3. The XMLHttpRequest object sends a request to a web server
+//4. The server processes the request
+//5. The server sends a response back to the web page
+//6. The response is read by JavaScript
+//7. Proper action (like page update) is performed by JavaScript
 
-let xhr=new XMLHttpRequest()//inatiated request
-xhr.open("GET","https://reqres.in/api/users/2",true)//start by get method from the website and tru for aysnc
-xhr.onload= function(){
- const obj=   JSON.parse(xhr.responseText)
-    document.getElementById("gh").innerText=obj.data.first_name
-    console.log(xhr.responseText)
-
+let xhr=new XMLHttpRequest()//XMLHttpRequest object (to request data from a web server)
+xhr.open("GET","https://reqres.in/api/users",true)  //To send a request to a server, you can use the open() and send() methods 
+//(method,url,async)
+xhr.onload= function(){ //Define a Callback Function
+    let mypro=new Promise((resolve,reject)=>{ //promise 
+        if (this.status==200) {
+            resolve(JSON.parse(this.responseText));
+        } else {
+            reject(this.status)
+        }
+    })
+    // document.getElementById("gh").innerText=text.data.first_name
+    
+    mypro. then((text) =>document.getElementById("gh").innerText=text.data[2].first_name)
+    .catch((errcode)=>console.log(`error wit status code ${errcode}`))
 }
 xhr.send()
+
+
+
 
 const axios = require('axios');
 
