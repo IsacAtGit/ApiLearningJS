@@ -14,7 +14,7 @@ let xhr=new XMLHttpRequest()//XMLHttpRequest object (to request data from a web 
 xhr.open("GET","https://reqres.in/api/users",true)  //To send a request to a server, you can use the open() and send() methods 
 //(method,url,async)
 xhr.onload= function(){ //Define a Callback Function
-    let mypro=new Promise((resolve,reject)=>{ //promise 
+    let mypro=new Promise((resolve,reject)=>{  
         if (this.status==200) {
             resolve(JSON.parse(this.responseText));
         } else {
